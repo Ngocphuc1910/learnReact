@@ -12,3 +12,25 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+/* Friend component styles */
+.friend-container {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.friend-title {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.friend-image {
+  width: 200px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
