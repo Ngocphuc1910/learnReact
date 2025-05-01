@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import Product from './product';
+import { Link } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -10,8 +12,16 @@ function App() {
         <p>
           Your React application is running successfully on localhost:3000
         </p>
+        <nav>
+          <ul style={{ listStyle: 'none', display: 'flex', gap: '20px' }}>
+            <li><Link to="/" style={{ color: 'white' }}>Home</Link></li>
+            <li><Link to="/product" style={{ color: 'white' }}>Product</Link></li>
+            <li><Link to="/colorpicker" style={{ color: 'white' }}>Color Picker</Link></li>
+          </ul>
+        </nav>
         <Friend />
         <Example />
+        <MyList />
       </header>
     </div>
   );
@@ -58,6 +68,18 @@ function Example() {
         Hello world
       </h1>
     );
+}
+
+const myArray = ['apple', 'banana', 'orange'];
+
+const myList = myArray.map((item) => <p>{item}</p>)
+
+function MyList() {
+  return (
+    <div>
+      {myList}
+    </div>
+  )
 }
 
 export default App;

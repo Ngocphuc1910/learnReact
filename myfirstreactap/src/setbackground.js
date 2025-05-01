@@ -18,3 +18,6 @@ export default function ColorPicker() {
     </div>
   );
 }
+
+// Bên ngoài I mean là cái <button> Aquamarine</button> sẽ là quyết định nó hiển thị như thế nào.
+//Bên trong cái setColor("Aquamarine") dùng để gắn các giá trí cho thằng setColor khi mà bấm vào button đó.
