@@ -16,7 +16,7 @@ function App() {
           <ul style={{ listStyle: 'none', display: 'flex', gap: '20px' }}>
             <li><Link to="/" style={{ color: 'white' }}>Home</Link></li>
             <li><Link to="/product" style={{ color: 'white' }}>Product</Link></li>
-            <li><Link to="/colorpicker" style={{ color: 'white' }}>Color Picker</Link></li>
+            <li><Link to="/colorpicker" style={{ color: 'white' }}>Color Pickera</Link></li>
           </ul>
         </nav>
         <Friend />

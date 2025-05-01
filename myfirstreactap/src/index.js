@@ -5,26 +5,17 @@ import App from './App';
 import Product from './product';
 import ColorPicker from './setbackground'
 import ColorPicker2 from './prop_backgroundseting';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />
-  },
-  {
-    path: "/product",
-    element: <Product />
-  },
-  {
-    path: "/colorpicker",
-    element: <ColorPicker />
-  }
-])
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/colorpickers" element={<ColorPicker />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
