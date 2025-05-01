@@ -6,6 +6,7 @@ import Product from './product';
 import ColorPicker from './setbackground'
 import ColorPicker2 from './prop_backgroundseting';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Input from './form';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,8 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/colorpickers" element={<ColorPicker />} />
+        <Route path="/colorpicker" element={<ColorPicker />} />
+        <Route path="/form" element={<Input />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Product from './product';
 import { Link } from 'react-router-dom';
-
+import Input from './form';
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
             <li><Link to="/" style={{ color: 'white' }}>Home</Link></li>
             <li><Link to="/product" style={{ color: 'white' }}>Product</Link></li>
             <li><Link to="/colorpicker" style={{ color: 'white' }}>Color Pickera</Link></li>
+            <li><Link to="/form" style={{ color: 'white'}}>Open Form</Link></li>
           </ul>
         </nav>
         <Friend />

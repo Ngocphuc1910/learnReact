@@ -34,3 +34,59 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* Form component styles */
+.emailContainer {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  max-width: 600px;
+}
+
+.emailContainer h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.emailContainer p {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.emailContainer form {
+  margin-top: 20px;
+}
+
+.emailContainer label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.emailContainer input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 250px;
+}
+
+.inputDisplay {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  max-width: 600px;
+}
+
+.inputDisplay h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.inputDisplay h4 {
+  color: #0066cc;
+  font-weight: normal;
+  font-style: italic;
+}
