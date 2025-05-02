@@ -4,7 +4,7 @@ import Product from './product';
 import { Link } from 'react-router-dom';
 import Input from './form';
 import { useTheme } from './ThemeContext';
-import {TodoList} from './ToDoList';
+import TodoList from './ToDoList';
 
 // Simple component to display current theme from context
 function ThemeDisplay() {
@@ -39,6 +39,7 @@ function App() {
             <li><Link to="/colorpicker" style={{ color: 'white' }}>Color Pickera</Link></li>
             <li><Link to="/form" style={{ color: 'white'}}>Open Form</Link></li>
             <li><Link to="/todolist" style={{ color: 'white'}}>Open Todo List</Link></li>
+            <li><Link to="/search" style={{ color: 'white'}}>Search (useCallback)</Link></li> {/* Add this new link */}
           </ul>
         </nav>
         <ThemeDisplay />
