@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function Input() {
@@ -7,7 +7,13 @@ function Input() {
   const [message, setMessage] = useState('');
   const [typingTimer, setTypingTimer] = useState(null);
   
+  // Add a useRef to track previous input value
+  const previousInputValue = useRef('');
+  
   const handleUserInput = (e) => {
+    // Store the current value as the previous value BEFORE updating state
+    previousInputValue.current = userInput;
+    // Then update the state with the new value
     setUserInput(e.target.value);
   };
 
@@ -48,6 +54,9 @@ function Input() {
       }
     };
   }, [userInput]); // This effect runs whenever userInput changes
+  
+  // Remove the useEffect that was updating the ref
+  // since we're now updating it before the state change
 
   return (
     <>
@@ -73,6 +82,18 @@ function Input() {
       <div className="inputDisplay">
         <h2>Current User Input: </h2>
         <h4>{userInput}</h4>
+        
+        {/* Display previous input value */}
+        <h2>Previous User Input: </h2>
+        <h4>{previousInputValue.current}</h4>
+        
+        {/* Update explanation about useRef */}
+        <div style={{ margin: '20px 0', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
+          <h3>useRef Explanation:</h3>
+          <p>The previous value is stored using useRef. Unlike state variables, updating a ref doesn't cause re-renders.</p>
+          <p>We update the ref <strong>before</strong> updating the state in the onChange handler, so it always shows the value from before the most recent change.</p>
+          <p>This demonstrates how useRef can maintain values across renders without affecting the rendering cycle itself.</p>
+        </div>
       </div>
     </>
   );
