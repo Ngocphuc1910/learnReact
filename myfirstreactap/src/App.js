@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Input from './form';
 import { useTheme } from './ThemeContext';
 import TodoList from './ToDoList';
+import MemoExample from './MemoExample';
 
 // Simple component to display current theme from context
 function ThemeDisplay() {
@@ -46,6 +47,7 @@ function App() {
         <Friend />
         <Example />
         <MyList />
+        <MemoExample />
       </header>
     </div>
   );
