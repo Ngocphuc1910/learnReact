@@ -3,6 +3,25 @@ import './App.css';
 import Product from './product';
 import { Link } from 'react-router-dom';
 import Input from './form';
+import { useTheme } from './ThemeContext';
+
+// Simple component to display current theme from context
+function ThemeDisplay() {
+  const { theme } = useTheme();
+  
+  return (
+    <div className="theme-display" style={{ 
+      padding: '10px', 
+      margin: '10px', 
+      border: '1px solid white',
+      backgroundColor: theme.color,
+      color: theme.textColor
+    }}>
+      <h3>Current Theme Color: {theme.color}</h3>
+      <p>This component is using the shared theme context.</p>
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -20,6 +39,7 @@ function App() {
             <li><Link to="/form" style={{ color: 'white'}}>Open Form</Link></li>
           </ul>
         </nav>
+        <ThemeDisplay />
         <Friend />
         <Example />
         <MyList />
