@@ -10,7 +10,7 @@ import Input from './form';
 import { ThemeProvider } from './ThemeContext';
 import TodoList from './ToDoList';
 import SearchComponent from './SearchComponent'; // Import the new component
-
+import MemoExample from './MemoExample';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +24,7 @@ root.render(
           <Route path="/form" element={<Input />} />
           <Route path="/todolist" element={<TodoList />} />
           <Route path="/search" element={<SearchComponent />} />
+          <Route path="/memo" element={<MemoExample />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

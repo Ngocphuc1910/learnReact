@@ -1,11 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import useInput from './useInput';
 
 function MemoExample() {
   const [numbers, setNumbers] = useState([10, 20, 30, 40, 50]);
-  const [multiplier, setMultiplier] = useState(2);
   const [darkMode, setDarkMode] = useState(false);
   const [renderCount, setRenderCount] = useState(0);
   const [useMemoEnabled, setUseMemoEnabled] = useState(true);
+  
+  const multiplierInput = useInput(2);
   
   // Increment render counter on each render
   useEffect(() => {
@@ -26,11 +28,11 @@ function MemoExample() {
   
   // Version WITH useMemo
   const totalWithMemo = useMemo(() => {
-    return calculateTotal(numbers, multiplier);
-  }, [numbers, multiplier]);
+    return calculateTotal(numbers, multiplierInput.value);
+  }, [numbers, multiplierInput.value]);
   
   // Version WITHOUT useMemo
-  const totalWithoutMemo = calculateTotal(numbers, multiplier);
+  const totalWithoutMemo = calculateTotal(numbers, multiplierInput.value);
   
   // Choose which result to display based on toggle
   const total = useMemoEnabled ? totalWithMemo : totalWithoutMemo;
@@ -40,10 +42,10 @@ function MemoExample() {
     console.log('Processing data...');
     return numbers.map(num => ({
       original: num,
-      multiplied: num * multiplier,
-      isEven: (num * multiplier) % 2 === 0
+      multiplied: num * multiplierInput.value,
+      isEven: (num * multiplierInput.value) % 2 === 0
     }));
-  }, [numbers, multiplier]);
+  }, [numbers, multiplierInput.value]);
   
   // Add a new random number
   const addNumber = () => {
@@ -54,7 +56,7 @@ function MemoExample() {
   // Reset to initial state
   const resetNumbers = () => {
     setNumbers([10, 20, 30, 40, 50]);
-    setMultiplier(2);
+    multiplierInput.setValue(2);
   };
   
   return (
@@ -110,8 +112,8 @@ function MemoExample() {
             Multiplier: 
             <input
               type="number"
-              value={multiplier}
-              onChange={(e) => setMultiplier(Number(e.target.value))}
+              value={multiplierInput.value}
+              onChange={multiplierInput.handleChange}
               style={{ 
                 marginLeft: '10px',
                 padding: '5px',
@@ -178,7 +180,7 @@ function MemoExample() {
           <thead>
             <tr>
               <th style={{ padding: '8px', textAlign: 'left', borderBottom: darkMode ? '1px solid #666' : '1px solid #ddd' }}>Original</th>
-              <th style={{ padding: '8px', textAlign: 'left', borderBottom: darkMode ? '1px solid #666' : '1px solid #ddd' }}>Multiplied by {multiplier}</th>
+              <th style={{ padding: '8px', textAlign: 'left', borderBottom: darkMode ? '1px solid #666' : '1px solid #ddd' }}>Multiplied by {multiplierInput.value}</th>
               <th style={{ padding: '8px', textAlign: 'left', borderBottom: darkMode ? '1px solid #666' : '1px solid #ddd' }}>Is Even</th>
             </tr>
           </thead>

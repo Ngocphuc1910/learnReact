@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from 'react';
+import useInput from './useInput';
 
 // Step 1: Define the initial state
 const initialTodos = {
@@ -99,17 +100,17 @@ function todoReducer(state, action) {
 function TodoList() {
   // Initialize useReducer with our reducer function and initial state
   const [state, dispatch] = useReducer(todoReducer, initialTodos);
-  const [newTodoText, setNewTodoText] = useState('');
+  const todoInput = useInput('');
   
   // Handler for adding a new todo
   const handleAddTodo = (e) => {
     e.preventDefault();
-    if (newTodoText.trim()) {
+    if (todoInput.value.trim()) {
       dispatch({ 
         type: ACTIONS.ADD_TODO, 
-        payload: { text: newTodoText } 
+        payload: { text: todoInput.value } 
       });
-      setNewTodoText('');
+      todoInput.setValue('');
     }
   };
   
@@ -140,14 +141,14 @@ function TodoList() {
       <form onSubmit={handleAddTodo} style={{ marginBottom: '20px', display: 'flex' }}>
         <input
           type="text"
-          value={newTodoText}
-          onChange={e => setNewTodoText(e.target.value)}
+          value={todoInput.value}
+          onChange={todoInput.handleChange}
           placeholder="Add a new todo"
           style={{ flex: 1, padding: '8px', marginRight: '10px' }}
         />
         <button 
           type="submit"
-          disabled={!newTodoText.trim()}
+          disabled={!todoInput.value.trim()}
           style={{ padding: '8px 16px' }}
         >
           Add

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import useInput from './useInput';
 
 function Input() {
   const [userInput, setUserInput] = useState('');

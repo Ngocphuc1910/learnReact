@@ -6,10 +6,11 @@ import Input from './form';
 import { useTheme } from './ThemeContext';
 import TodoList from './ToDoList';
 import MemoExample from './MemoExample';
+import useThemeManager from './useThemeManager';
 
 // Simple component to display current theme from context
 function ThemeDisplay() {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useThemeManager();
   
   return (
     <div className="theme-display" style={{ 
@@ -21,6 +22,7 @@ function ThemeDisplay() {
     }}>
       <h3>Current Theme Color: {theme.color}</h3>
       <p>This component is using the shared theme context.</p>
+      <button onClick={toggleTheme} style={{ marginTop: '10px' }}>Toggle Theme</button>
     </div>
   );
 }
@@ -41,6 +43,7 @@ function App() {
             <li><Link to="/form" style={{ color: 'white'}}>Open Form</Link></li>
             <li><Link to="/todolist" style={{ color: 'white'}}>Open Todo List</Link></li>
             <li><Link to="/search" style={{ color: 'white'}}>Search (useCallback)</Link></li> {/* Add this new link */}
+            <li><Link to="/memo" style={{ color: 'white'}}>Memo Example</Link></li>
           </ul>
         </nav>
         <ThemeDisplay />
@@ -70,7 +73,7 @@ const friends = [
 
 // New function component starts here:
 function Friend() {
-  const friend = friends[2] //NÓI CHUNG LÀ ADD THÊM 1 LOGIC NỮA Ở ĐÂY TRƯỚC KHI RETURN.
+  const friend = friends[1] //NÓI CHUNG LÀ ADD THÊM 1 LOGIC NỮA Ở ĐÂY TRƯỚC KHI RETURN.
   return(
     <div className="friend-container">
       <h1 className="friend-title">{friend.title}</h1>

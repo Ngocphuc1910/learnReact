@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import useInput from './useInput';
 
 function SearchComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const searchInput = useInput('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   
@@ -36,9 +37,9 @@ function SearchComponent() {
   // Update search results when search term changes
   useEffect(() => {
     // Show all items when search is empty, otherwise filter
-    const results = searchTerm === '' ? items : performSearch(searchTerm);
+    const results = searchInput.value === '' ? items : performSearch(searchInput.value);
     setSearchResults(results);
-  }, [searchTerm, performSearch]);
+  }, [searchInput.value, performSearch]);
   
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
@@ -47,8 +48,8 @@ function SearchComponent() {
       <div style={{ marginBottom: '20px' }}>
         <input
           type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchInput.value}
+          onChange={searchInput.handleChange}
           placeholder="Search hooks..."
           style={{ width: '100%', padding: '10px', fontSize: '16px' }}
         />
@@ -103,7 +104,7 @@ function SearchComponent() {
       
       <button
         onClick={() => {
-          setSearchTerm('');
+          searchInput.handleChange({ target: { value: '' } });
           setSelectedItem(null);
         }}
         style={{
