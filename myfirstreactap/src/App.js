@@ -7,6 +7,7 @@ import { useTheme } from './ThemeContext';
 import TodoList from './ToDoList';
 import MemoExample from './MemoExample';
 import useThemeManager from './useThemeManager';
+import Login from './login';
 
 // Simple component to display current theme from context
 function ThemeDisplay() {
@@ -42,8 +43,9 @@ function App() {
             <li><Link to="/colorpicker" style={{ color: 'white' }}>Color Pickera</Link></li>
             <li><Link to="/form" style={{ color: 'white'}}>Open Form</Link></li>
             <li><Link to="/todolist" style={{ color: 'white'}}>Open Todo List</Link></li>
-            <li><Link to="/search" style={{ color: 'white'}}>Search (useCallback)</Link></li> {/* Add this new link */}
+            <li><Link to="/search" style={{ color: 'white'}}>Search (useCallback)</Link></li>
             <li><Link to="/memo" style={{ color: 'white'}}>Memo Example</Link></li>
+            <li><Link to="/login" style={{ color: 'white'}}>Login</Link></li>
           </ul>
         </nav>
         <ThemeDisplay />
