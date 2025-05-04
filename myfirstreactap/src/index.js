@@ -12,6 +12,7 @@ import TodoList from './ToDoList';
 import SearchComponent from './SearchComponent'; // Import the new component
 import MemoExample from './MemoExample';
 import Login from './login';
+import LifecycleExample from './LifecycleExample';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,6 +29,7 @@ root.render(
           <Route path="/search" element={<SearchComponent />} />
           <Route path="/memo" element={<MemoExample />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/lifecycle" element={<LifecycleExample />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

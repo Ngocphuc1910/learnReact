@@ -12,4 +12,4 @@ function useInput(initialValue) {
   return { value, handleChange }; // 2️⃣ Return value and handler
 }
 
-export default useInput; 
+export default useInput;
