@@ -9,6 +9,7 @@ import MemoExample from './MemoExample';
 import useThemeManager from './useThemeManager';
 import Login from './login';
 import LifecycleExample from './LifecycleExample';
+import AsyncAwaitDemo from './AsyncAwaitDemo';
 
 // Simple component to display current theme from context
 function ThemeDisplay() {
@@ -48,6 +49,7 @@ function App() {
             <li><Link to="/memo" style={{ color: 'white'}}>Memo Example</Link></li>
             <li><Link to="/login" style={{ color: 'white'}}>Login</Link></li>
             <li><Link to="/lifecycle" style={{ color: 'white'}}>Lifecycle</Link></li>
+            <li><Link to="/async" style={{ color: 'white'}}>Async/Await</Link></li>
           </ul>
         </nav>
         <ThemeDisplay />
