@@ -14,6 +14,7 @@ import MemoExample from './MemoExample';
 import Login from './login';
 import LifecycleExample from './LifecycleExample';
 import AsyncAwaitDemo from './AsyncAwaitDemo'; // Import the Async/Await demo
+import PromisesDemo from './PromisesDemo'; // Import the Promises demo
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -32,6 +33,7 @@ root.render(
           <Route path="/login" element={<Login />} />
           <Route path="/lifecycle" element={<LifecycleExample />} />
           <Route path="/async" element={<AsyncAwaitDemo />} />
+          <Route path="/promises" element={<PromisesDemo />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
