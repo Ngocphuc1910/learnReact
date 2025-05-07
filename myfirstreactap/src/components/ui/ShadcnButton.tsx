@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styles, colors } from './shadcn-style';
+import { ButtonProps } from '../../types';
 
-const ShadcnButton = ({ 
+const ShadcnButton: React.FC<ButtonProps> = ({ 
   children,
   onClick,
   variant = 'default',
@@ -11,7 +12,7 @@ const ShadcnButton = ({
   type = 'button',
   ...props
 }) => {
-  const getVariantStyles = () => {
+  const getVariantStyles = (): React.CSSProperties => {
     switch (variant) {
       case 'default':
       case 'primary':
@@ -19,9 +20,6 @@ const ShadcnButton = ({
           backgroundColor: colors.primary,
           color: 'white',
           border: 'none',
-          '&:hover': {
-            backgroundColor: colors.primaryDark,
-          }
         };
       case 'secondary':
         return {
@@ -62,7 +60,7 @@ const ShadcnButton = ({
     }
   };
 
-  const getSizeStyles = () => {
+  const getSizeStyles = (): React.CSSProperties => {
     switch (size) {
       case 'small':
         return {
@@ -87,17 +85,17 @@ const ShadcnButton = ({
     }
   };
 
-  const buttonStyle = {
-    ...styles.button,
+  const buttonStyle: React.CSSProperties = {
+    ...styles.button as React.CSSProperties,
     ...getVariantStyles(),
     ...getSizeStyles(),
     opacity: disabled ? 0.5 : 1,
     cursor: disabled ? 'not-allowed' : 'pointer',
-    ...JSON.parse(className || '{}'),
+    ...(className ? JSON.parse(className) : {}),
   };
 
   // Handle hover effect with inline styles
-  const [isHovering, setIsHovering] = React.useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   // Apply hover color based on variant
   if (isHovering && !disabled) {
