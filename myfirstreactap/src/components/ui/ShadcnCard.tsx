@@ -1,7 +1,8 @@
 import React from 'react';
 import { styles } from './shadcn-style';
+import { CardProps } from '../../types';
 
-const ShadcnCard = ({ 
+const ShadcnCard: React.FC<CardProps> = ({ 
   children, 
   title, 
   description, 
@@ -11,10 +12,10 @@ const ShadcnCard = ({
   error = null 
 }) => {
   return (
-    <div style={{ ...styles.card, ...JSON.parse(className || '{}') }}>
+    <div style={{ ...styles.card as React.CSSProperties, ...(className ? JSON.parse(className) : {}) }}>
       {title && (
-        <div style={styles.cardHeader}>
-          <h3 style={styles.cardTitle}>{title}</h3>
+        <div style={styles.cardHeader as React.CSSProperties}>
+          <h3 style={styles.cardTitle as React.CSSProperties}>{title}</h3>
           {description && (
             <p style={{ 
               fontSize: '0.875rem', 
@@ -64,17 +65,17 @@ const ShadcnCard = ({
       )}
       
       {error && (
-        <div style={styles.error}>
+        <div style={styles.error as React.CSSProperties}>
           {error}
         </div>
       )}
       
-      <div style={styles.cardContent}>
+      <div style={styles.cardContent as React.CSSProperties}>
         {children}
       </div>
       
       {footer && (
-        <div style={styles.cardFooter}>
+        <div style={styles.cardFooter as React.CSSProperties}>
           {footer}
         </div>
       )}
