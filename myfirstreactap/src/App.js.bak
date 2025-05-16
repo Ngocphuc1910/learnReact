@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import './styles/dashboard.css';
 import Product from './product';
-import { Link, Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Input from './form';
+import { useTheme } from './ThemeContext';
 import TodoList from './ToDoList';
 import MemoExample from './MemoExample';
 import useThemeManager from './useThemeManager';
@@ -11,16 +11,9 @@ import Login from './login';
 import LifecycleExample from './LifecycleExample';
 import AsyncAwaitDemo from './AsyncAwaitDemo';
 import PromisesDemo from './PromisesDemo';
-import SearchComponent from './SearchComponent';
-import ColorPicker from './setbackground';
 import ShadcnCard from './components/ui/ShadcnCard';
 import ShadcnButton from './components/ui/ShadcnButton';
 import { styles, colors } from './components/ui/shadcn-style';
-
-// Dashboard imports
-import { DashboardLayout } from './components/dashboard/layout/DashboardLayout';
-import { DashboardPage } from './components/dashboard/DashboardPage';
-import { ProjectsPage } from './components/dashboard/ProjectsPage';
 
 // Simple component to display current theme from context
 function ThemeDisplay() {
@@ -41,7 +34,7 @@ function ThemeDisplay() {
   );
 }
 
-function HomePage() {
+function App() {
   return (
     <div className="App" style={{ 
       minHeight: '100vh',
@@ -67,7 +60,7 @@ function HomePage() {
             opacity: 0.9,
             marginBottom: '2rem'
           }}>
-            Your React application is running successfully on localhost:3001
+            Your React application is running successfully on localhost:3000
           </p>
         </div>
       </header>
@@ -88,8 +81,8 @@ function HomePage() {
               padding: '0.5rem 0',
             }}>
               <NavLink to="/">Home</NavLink>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-              <NavLink to="/dashboard/projects">Projects & Tasks</NavLink>
+              <NavLink to="/dashboard.html">Dashboard</NavLink>
+              <NavLink to="/projects.html">Projects & Tasks</NavLink>
               <NavLink to="/product">Product</NavLink>
               <NavLink to="/colorpicker">Color Picker</NavLink>
               <NavLink to="/form">Form</NavLink>
@@ -257,33 +250,6 @@ function NavLink({ to, children }) {
         {children}
       </Link>
     </li>
-  );
-}
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard/*" element={<DashboardLayout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path="projects" element={<ProjectsPage />} />
-          <Route path="timer" element={<div>Pomodoro Timer Coming Soon</div>} />
-          <Route path="calendar" element={<div>Calendar Coming Soon</div>} />
-          <Route path="settings" element={<div>Settings Coming Soon</div>} />
-        </Route>
-        <Route path="/product" element={<Product />} />
-        <Route path="/colorpicker" element={<ColorPicker />} />
-        <Route path="/form" element={<Input />} />
-        <Route path="/todolist" element={<TodoList />} />
-        <Route path="/search" element={<SearchComponent />} />
-        <Route path="/memo" element={<MemoExample />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/lifecycle" element={<LifecycleExample />} />
-        <Route path="/async" element={<AsyncAwaitDemo />} />
-        <Route path="/promises" element={<PromisesDemo />} />
-      </Routes>
-    </Router>
   );
 }
 

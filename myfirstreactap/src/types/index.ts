@@ -89,4 +89,72 @@ export interface TodoItem {
   id: number;
   text: string;
   completed: boolean;
-} 
+}
+
+export interface User {
+  id: string;
+  name: string;
+  role: string;
+  avatar?: string;
+  goalHours: number; // Default 10000
+  weeklyGoalHours: number; // Default 25
+}
+
+export interface FocusSession {
+  id: string;
+  userId: string;
+  projectId: string;
+  taskId?: string;
+  startTime: Date;
+  endTime: Date;
+  duration: number; // in minutes
+  notes?: string;
+}
+
+export interface Project {
+  id: string;
+  userId: string;
+  name: string;
+  description?: string;
+  color: string;
+  totalFocusTime: number; // in minutes
+  createdAt: Date;
+  isActive: boolean;
+}
+
+export interface Task {
+  id: string;
+  userId: string;
+  projectId: string;
+  name: string;
+  description?: string;
+  isCompleted: boolean;
+  dueDate?: Date;
+  totalFocusTime: number; // in minutes
+  createdAt: Date;
+}
+
+export interface FocusStreak {
+  currentStreak: number;
+  longestStreak: number;
+  totalFocusDays: number;
+  streakDates: Array<{
+    date: Date;
+    hasFocused: boolean;
+  }>;
+}
+
+export interface DateRange {
+  startDate: Date;
+  endDate: Date;
+  label?: string;
+}
+
+export interface WeeklyBreakdown {
+  day: string;
+  shortDay: string;
+  focusMinutes: number;
+  date: Date;
+}
+
+export type TimeUnit = 'daily' | 'weekly' | 'monthly'; 
