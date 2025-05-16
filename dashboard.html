@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Make10000hours</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#BB5F5A", secondary: "" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      }
+      #sidebar {
+      overflow: hidden;
+      }
+      #sidebar.w-0 {
+      width: 0;
+      }
+      .custom-checkbox {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #d1d5db;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s;
+      }
+      .custom-checkbox:checked {
+      background-color: #BB5F5A;
+      border-color: #BB5F5A;
+      }
+      .custom-checkbox:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .custom-switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+      }
+      .custom-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      }
+      .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #e5e7eb;
+      transition: .4s;
+      border-radius: 20px;
+      }
+      .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      }
+      input:checked + .switch-slider {
+      background-color: #BB5F5A;
+      }
+      input:checked + .switch-slider:before {
+      transform: translateX(20px);
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      }
+      .tab-button {
+      position: relative;
+      }
+      .tab-button.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #BB5F5A;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex h-screen overflow-hidden">
+      <!-- Left Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-white border-r border-gray-200 flex flex-col transition-all duration-300"
+      >
+        <div
+          class="p-4 border-b border-gray-200 flex items-center justify-between"
+        >
+          <h1 class="text-xl font-['Pacifico'] text-primary">Make10000hours</h1>
+          <button id="toggle-sidebar" class="p-1 hover:bg-gray-100">
+            <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+              <i class="ri-arrow-left-s-line"></i>
+            </div>
+          </button>
+        </div>
+        <div class="p-4 border-b border-gray-200">
+          <div class="flex items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white"
+            >
+              <span class="font-medium">JD</span>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-900">John Doe</p>
+              <p class="text-xs text-gray-500">Product Manager</p>
+            </div>
+          </div>
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4">
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-primary bg-indigo-50 rounded-md"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-dashboard-line"></i>
+                </div>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-task-line"></i>
+                </div>
+                Projects & Tasks
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-timer-line"></i>
+                </div>
+                Pomodoro Timer
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                Calendar
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-settings-line"></i>
+                </div>
+                Settings
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="p-4 border-t border-gray-200">
+          <a
+            href="/"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+          >
+            <div class="w-5 h-5 flex items-center justify-center mr-3">
+              <i class="ri-arrow-left-line"></i>
+            </div>
+            Back to Home
+          </a>
+        </div>
+      </aside>
+      <!-- Main Content -->
+      <main class="flex-1 flex flex-col overflow-hidden">
+        <!-- Top Bar -->
+        <div
+          class="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-white"
+        >
+          <div class="flex items-center">
+            <button
+              id="show-sidebar"
+              class="p-2 mr-2 rounded-md hover:bg-gray-100 hidden"
+            >
+              <div
+                class="w-5 h-5 flex items-center justify-center text-gray-500"
+              >
+                <i class="ri-menu-line"></i>
+              </div>
+            </button>
+            <div class="text-lg font-semibold text-gray-800">Dashboard</div>
+            <div class="ml-4 text-sm text-gray-500">May 16, 2025</div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="relative" id="dateFilter">
+              <button
+                class="flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-button text-gray-700 bg-white hover:bg-gray-50 whitespace-nowrap"
+                data-max-range="365"
+              >
+                <span id="selectedDateRange">Last 7 Days</span>
+                <div class="w-4 h-4 flex items-center justify-center ml-2">
+                  <i class="ri-arrow-down-s-line"></i>
+                </div>
+              </button>
+              <div
+                class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 hidden"
+                id="dateFilterDropdown"
+              >
+                <button
+                  class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50"
+                  data-range="today"
+                >
+                  Today
+                </button>
+                <button
+                  class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50"
+                  data-range="7days"
+                >
+                  Last 7 days
+                </button>
+                <button
+                  class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50"
+                  data-range="30days"
+                >
+                  Last 30 days
+                </button>
+                <button
+                  class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center justify-between"
+                  data-range="custom"
+                >
+                  <span>Time range</span>
+                  <div class="w-4 h-4 flex items-center justify-center">
+                    <i class="ri-calendar-line"></i>
+                  </div>
+                </button>
+              </div>
+              <div
+                class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 p-4 hidden"
+                id="dateRangePicker"
+              >
+                <div class="flex items-center justify-between mb-4">
+                  <div class="text-sm font-medium text-gray-700">
+                    Select date range
+                  </div>
+                  <button
+                    class="text-gray-400 hover:text-gray-600"
+                    id="closeDatePicker"
+                  >
+                    <div class="w-4 h-4 flex items-center justify-center">
+                      <i class="ri-close-line"></i>
+                    </div>
+                  </button>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-button focus:outline-none focus:border-primary"
+                    id="dateRange"
+                    placeholder="Select date range"
+                    readonly
+                  />
+                </div>
+                <button
+                  class="w-full mt-4 px-4 py-2 bg-primary text-white text-sm font-medium rounded-button hover:bg-opacity-90"
+                  id="applyDateRange"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+            <button class="p-2 rounded-full hover:bg-gray-100">
+              <div
+                class="w-5 h-5 flex items-center justify-center text-gray-500"
+              >
+                <i class="ri-notification-line"></i>
+              </div>
+            </button>
+            <button class="p-2 rounded-full hover:bg-gray-100">
+              <div
+                class="w-5 h-5 flex items-center justify-center text-gray-500"
+              >
+                <i class="ri-settings-line"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Dashboard Content -->
+        <div class="flex-1 overflow-y-auto p-6 bg-gray-50">
+          <div class="max-w-7xl mx-auto">
+            <!-- Focus Time Statistics Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+              <!-- Average Focus Time -->
+              <div
+                class="bg-white rounded-lg shadow-sm p-8 border border-gray-100"
+              >
+                <div class="flex items-center justify-between mb-6">
+                  <h3 class="text-lg font-medium text-gray-800">
+                    Average Focus Time
+                  </h3>
+                </div>
+                <div class="flex items-center justify-between mb-8">
+                  <div>
+                    <div class="text-3xl font-bold text-gray-900">3h 24m</div>
+                    <p class="text-sm text-gray-500 mt-2">Daily average</p>
+                  </div>
+                  <div>
+                    <div class="text-3xl font-bold text-gray-900">23h 48m</div>
+                    <p class="text-sm text-gray-500 mt-2">Total focus time</p>
+                  </div>
+                </div>
+                <div class="space-y-6">
+                  <div>
+                    <div class="flex items-center justify-between text-sm mb-1">
+                      <span class="text-gray-600">Weekly goal (25h)</span>
+                      <span class="font-medium text-gray-700"
+                        >17h 12m / 25h</span
+                      >
+                    </div>
+                    <div
+                      class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 68%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between text-sm mb-1">
+                      <span class="text-gray-600">Journey to 10,000 hours</span>
+                      <span class="font-medium text-gray-700"
+                        >1,248h / 10,000h</span
+                      >
+                    </div>
+                    <div
+                      class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 12.48%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Weekly Focus Breakdown -->
+              <div
+                class="bg-white rounded-lg shadow-sm p-6 border border-gray-100"
+              >
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-lg font-medium text-gray-800">
+                    Weekly Breakdown
+                  </h3>
+                  <button class="text-gray-400 hover:text-gray-600">
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-more-2-line"></i>
+                    </div>
+                  </button>
+                </div>
+                <div class="space-y-3">
+                  <div class="flex items-center">
+                    <div class="w-8 text-xs text-gray-500">Mon</div>
+                    <div
+                      class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 45%"
+                      ></div>
+                    </div>
+                    <div class="w-16 text-right text-sm text-gray-600 ml-2">
+                      2h 15m
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-8 text-xs text-gray-500">Tue</div>
+                    <div
+                      class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 75%"
+                      ></div>
+                    </div>
+                    <div class="w-16 text-right text-sm text-gray-600 ml-2">
+                      3h 45m
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-8 text-xs text-gray-500">Wed</div>
+                    <div
+                      class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 60%"
+                      ></div>
+                    </div>
+                    <div class="w-16 text-right text-sm text-gray-600 ml-2">
+                      3h 00m
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-8 text-xs text-gray-500">Thu</div>
+                    <div
+                      class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 80%"
+                      ></div>
+                    </div>
+                    <div class="w-16 text-right text-sm text-gray-600 ml-2">
+                      4h 00m
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-8 text-xs text-gray-500">Fri</div>
+                    <div
+                      class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 55%"
+                      ></div>
+                    </div>
+                    <div class="w-16 text-right text-sm text-gray-600 ml-2">
+                      2h 45m
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-8 text-xs text-gray-500">Sat</div>
+                    <div
+                      class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 20%"
+                      ></div>
+                    </div>
+                    <div class="w-16 text-right text-sm text-gray-600 ml-2">
+                      1h 00m
+                    </div>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-8 text-xs text-gray-500">Sun</div>
+                    <div
+                      class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary rounded-full"
+                        style="width: 10%"
+                      ></div>
+                    </div>
+                    <div class="w-16 text-right text-sm text-gray-600 ml-2">
+                      0h 30m
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Focus Streak -->
+              <div
+                class="bg-white rounded-lg shadow-sm p-6 border border-gray-100"
+              >
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-lg font-medium text-gray-800">
+                    Focus Streak
+                  </h3>
+                  <div
+                    class="flex items-center text-sm text-green-500 font-medium"
+                  >
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                      <i class="ri-fire-line"></i>
+                    </div>
+                    <span>5 days</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-7 gap-2 mb-4">
+                  <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-500 mb-1">S</div>
+                    <div
+                      class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs text-gray-400"
+                    >
+                      10
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-500 mb-1">M</div>
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-xs text-primary"
+                    >
+                      11
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-500 mb-1">T</div>
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-xs text-primary"
+                    >
+                      12
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-500 mb-1">W</div>
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-xs text-primary"
+                    >
+                      13
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-500 mb-1">T</div>
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-xs text-primary"
+                    >
+                      14
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-500 mb-1">F</div>
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary bg-opacity-10 flex items-center justify-center text-xs text-primary"
+                    >
+                      15
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-500 mb-1">S</div>
+                    <div
+                      class="w-8 h-8 rounded-full bg-white border-2 border-dashed border-gray-200 flex items-center justify-center text-xs text-gray-400"
+                    >
+                      16
+                    </div>
+                  </div>
+                </div>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Longest streak</span>
+                    <span class="text-sm font-medium text-gray-800"
+                      >12 days</span
+                    >
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Current streak</span>
+                    <span class="text-sm font-medium text-gray-800"
+                      >5 days</span
+                    >
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Total focus days</span>
+                    <span class="text-sm font-medium text-gray-800"
+                      >87 days</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Sidebar Toggle Functionality
+        const sidebar = document.getElementById("sidebar");
+        const toggleSidebarBtn = document.getElementById("toggle-sidebar");
+        const showSidebarBtn = document.getElementById("show-sidebar");
+        
+        function toggleSidebar() {
+          if (sidebar.classList.contains("w-64")) {
+            sidebar.classList.remove("w-64");
+            sidebar.classList.add("w-0");
+            showSidebarBtn.classList.remove("hidden");
+          } else {
+            sidebar.classList.remove("w-0");
+            sidebar.classList.add("w-64");
+            showSidebarBtn.classList.add("hidden");
+          }
+        }
+        
+        toggleSidebarBtn.addEventListener("click", toggleSidebar);
+        showSidebarBtn.addEventListener("click", toggleSidebar);
+        
+        // Date Filter
+        const dateFilter = document.getElementById("dateFilter");
+        const dateFilterDropdown = document.getElementById("dateFilterDropdown");
+        const dateRangePicker = document.getElementById("dateRangePicker");
+        const selectedDateRange = document.getElementById("selectedDateRange");
+        const dateRangeInput = document.getElementById("dateRange");
+        const closeDatePicker = document.getElementById("closeDatePicker");
+        const applyDateRange = document.getElementById("applyDateRange");
+        
+        dateFilter.querySelector("button").addEventListener("click", function (e) {
+          e.stopPropagation();
+          dateFilterDropdown.classList.toggle("hidden");
+          dateRangePicker.classList.add("hidden");
+        });
+        
+        dateFilterDropdown.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const range = this.dataset.range;
+            if (range === "custom") {
+              dateRangePicker.classList.remove("hidden");
+              dateFilterDropdown.classList.add("hidden");
+            } else {
+              dateFilterDropdown.classList.add("hidden");
+              selectedDateRange.textContent = this.textContent.trim();
+            }
+          });
+        });
+        
+        closeDatePicker.addEventListener("click", function () {
+          dateRangePicker.classList.add("hidden");
+        });
+        
+        document.addEventListener("click", function (e) {
+          if (!dateFilter.contains(e.target)) {
+            dateFilterDropdown.classList.add("hidden");
+            dateRangePicker.classList.add("hidden");
+          }
+        });
+        
+        // Initialize Flatpickr
+        if (typeof flatpickr === 'function') {
+          flatpickr(dateRangeInput, {
+            mode: "range",
+            dateFormat: "M d, Y",
+          });
+        }
+      });
+    </script>
+  </body>
+</html> 

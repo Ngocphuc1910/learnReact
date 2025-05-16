@@ -81,6 +81,8 @@ function App() {
               padding: '0.5rem 0',
             }}>
               <NavLink to="/">Home</NavLink>
+              <NavLink to="/dashboard.html">Dashboard</NavLink>
+              <NavLink to="/projects.html">Projects & Tasks</NavLink>
               <NavLink to="/product">Product</NavLink>
               <NavLink to="/colorpicker">Color Picker</NavLink>
               <NavLink to="/form">Form</NavLink>

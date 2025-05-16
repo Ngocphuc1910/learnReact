@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects & Tasks - Make10000hours</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#BB5F5A", secondary: "" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      }
+      #sidebar {
+      overflow: hidden;
+      }
+      #sidebar.w-0 {
+      width: 0;
+      }
+      .custom-checkbox {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #d1d5db;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s;
+      }
+      .custom-checkbox:checked {
+      background-color: #BB5F5A;
+      border-color: #BB5F5A;
+      }
+      .custom-checkbox:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex h-screen overflow-hidden">
+      <!-- Left Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-white border-r border-gray-200 flex flex-col transition-all duration-300"
+      >
+        <div
+          class="p-4 border-b border-gray-200 flex items-center justify-between"
+        >
+          <h1 class="text-xl font-['Pacifico'] text-primary">Make10000hours</h1>
+          <button id="toggle-sidebar" class="p-1 hover:bg-gray-100">
+            <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+              <i class="ri-arrow-left-s-line"></i>
+            </div>
+          </button>
+        </div>
+        <div class="p-4 border-b border-gray-200">
+          <div class="flex items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white"
+            >
+              <span class="font-medium">JD</span>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-900">John Doe</p>
+              <p class="text-xs text-gray-500">Product Manager</p>
+            </div>
+          </div>
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4">
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="dashboard.html"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-dashboard-line"></i>
+                </div>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-primary bg-indigo-50 rounded-md"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-task-line"></i>
+                </div>
+                Projects & Tasks
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-timer-line"></i>
+                </div>
+                Pomodoro Timer
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-calendar-line"></i>
+                </div>
+                Calendar
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+              >
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-settings-line"></i>
+                </div>
+                Settings
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="p-4 border-t border-gray-200">
+          <a
+            href="/"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
+          >
+            <div class="w-5 h-5 flex items-center justify-center mr-3">
+              <i class="ri-arrow-left-line"></i>
+            </div>
+            Back to Home
+          </a>
+        </div>
+      </aside>
+      <!-- Main Content -->
+      <main class="flex-1 flex flex-col overflow-hidden">
+        <!-- Top Bar -->
+        <div
+          class="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-white"
+        >
+          <div class="flex items-center">
+            <button
+              id="show-sidebar"
+              class="p-2 mr-2 rounded-md hover:bg-gray-100 hidden"
+            >
+              <div
+                class="w-5 h-5 flex items-center justify-center text-gray-500"
+              >
+                <i class="ri-menu-line"></i>
+              </div>
+            </button>
+            <div class="text-lg font-semibold text-gray-800">Projects & Tasks</div>
+            <div class="ml-4 text-sm text-gray-500">May 16, 2025</div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button class="flex items-center px-3 py-1.5 bg-primary text-white text-sm font-medium rounded-button hover:bg-opacity-90">
+              <div class="w-4 h-4 flex items-center justify-center mr-2">
+                <i class="ri-add-line"></i>
+              </div>
+              New Project
+            </button>
+            <button class="p-2 rounded-full hover:bg-gray-100">
+              <div
+                class="w-5 h-5 flex items-center justify-center text-gray-500"
+              >
+                <i class="ri-notification-line"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Projects Content -->
+        <div class="flex-1 overflow-y-auto p-6 bg-gray-50">
+          <div class="max-w-7xl mx-auto">
+            <!-- Projects and Tasks Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <!-- Top Projects -->
+              <div
+                class="bg-white rounded-lg shadow-sm p-8 border border-gray-100"
+              >
+                <div class="flex items-center justify-between mb-8">
+                  <h3 class="text-lg font-medium text-gray-800">
+                    Top Projects
+                  </h3>
+                  <button
+                    class="text-sm text-primary hover:text-primary-dark font-medium"
+                  >
+                    View All
+                  </button>
+                </div>
+                <div class="space-y-6">
+                  <div>
+                    <div class="flex items-center justify-between mb-1">
+                      <div class="flex items-center">
+                        <div
+                          class="w-3 h-3 rounded-full bg-[#57B5E7] mr-2"
+                        ></div>
+                        <span class="text-sm font-medium text-gray-800"
+                          >Website Redesign</span
+                        >
+                      </div>
+                      <span class="text-sm text-gray-600">12h 30m</span>
+                    </div>
+                    <div
+                      class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-[#57B5E7] rounded-full"
+                        style="width: 85%"
+                      ></div>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                      <span class="text-xs text-gray-500"
+                        >32% of total time</span
+                      >
+                    </div>
+                  </div>
+                  <div class="pt-2">
+                    <div class="flex items-center justify-between mb-1">
+                      <div class="flex items-center">
+                        <div
+                          class="w-3 h-3 rounded-full bg-[#8DD3C7] mr-2"
+                        ></div>
+                        <span class="text-sm font-medium text-gray-800"
+                          >Mobile App Development</span
+                        >
+                      </div>
+                      <span class="text-sm text-gray-600">8h 45m</span>
+                    </div>
+                    <div
+                      class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-[#8DD3C7] rounded-full"
+                        style="width: 65%"
+                      ></div>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                      <span class="text-xs text-gray-500"
+                        >23% of total time</span
+                      >
+                    </div>
+                  </div>
+                  <div class="pt-2">
+                    <div class="flex items-center justify-between mb-1">
+                      <div class="flex items-center">
+                        <div
+                          class="w-3 h-3 rounded-full bg-[#FBBF72] mr-2"
+                        ></div>
+                        <span class="text-sm font-medium text-gray-800"
+                          >Marketing Campaign</span
+                        >
+                      </div>
+                      <span class="text-sm text-gray-600">6h 15m</span>
+                    </div>
+                    <div
+                      class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-[#FBBF72] rounded-full"
+                        style="width: 45%"
+                      ></div>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                      <span class="text-xs text-gray-500"
+                        >16% of total time</span
+                      >
+                    </div>
+                  </div>
+                  <div class="pt-2">
+                    <div class="flex items-center justify-between mb-1">
+                      <div class="flex items-center">
+                        <div
+                          class="w-3 h-3 rounded-full bg-[#FC8D62] mr-2"
+                        ></div>
+                        <span class="text-sm font-medium text-gray-800"
+                          >Content Creation</span
+                        >
+                      </div>
+                      <span class="text-sm text-gray-600">4h 20m</span>
+                    </div>
+                    <div
+                      class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-[#FC8D62] rounded-full"
+                        style="width: 30%"
+                      ></div>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                      <span class="text-xs text-gray-500"
+                        >11% of total time</span
+                      >
+                    </div>
+                  </div>
+                  <div class="pt-2">
+                    <div class="flex items-center justify-between mb-1">
+                      <div class="flex items-center">
+                        <div
+                          class="w-3 h-3 rounded-full bg-gray-400 mr-2"
+                        ></div>
+                        <span class="text-sm font-medium text-gray-800"
+                          >Other Projects</span
+                        >
+                      </div>
+                      <span class="text-sm text-gray-600">6h 50m</span>
+                    </div>
+                    <div
+                      class="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-gray-400 rounded-full"
+                        style="width: 18%"
+                      ></div>
+                    </div>
+                    <div class="flex justify-end mt-1">
+                      <span class="text-xs text-gray-500"
+                        >18% of total time</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Top Tasks -->
+              <div
+                class="bg-white rounded-lg shadow-sm p-6 border border-gray-100"
+              >
+                <div class="flex items-center justify-between mb-6">
+                  <h3 class="text-lg font-medium text-gray-800">Top Tasks</h3>
+                  <div class="relative">
+                    <button
+                      class="flex items-center text-sm text-gray-600 hover:text-gray-800"
+                    >
+                      <span>This Week</span>
+                      <div
+                        class="w-4 h-4 flex items-center justify-center ml-1"
+                      >
+                        <i class="ri-arrow-down-s-line"></i>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <div
+                    class="flex items-center justify-between py-3 border-b border-gray-100"
+                  >
+                    <div class="flex items-start">
+                      <div
+                        class="w-8 h-8 rounded-full bg-[#57B5E7] bg-opacity-10 flex items-center justify-center text-[#57B5E7] mr-3"
+                      >
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-code-line"></i>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 class="text-sm font-medium text-gray-800">
+                          Design system components
+                        </h4>
+                        <div class="flex items-center mt-1">
+                          <span class="text-xs text-gray-500"
+                            >Website Redesign</span
+                          >
+                          <span class="mx-2 text-gray-300">•</span>
+                          <span class="text-xs text-gray-500">4h 15m</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center text-xs font-medium text-gray-600"
+                    >
+                      <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                      <span>Completed</span>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-between py-3 border-b border-gray-100"
+                  >
+                    <div class="flex items-start">
+                      <div
+                        class="w-8 h-8 rounded-full bg-[#8DD3C7] bg-opacity-10 flex items-center justify-center text-[#8DD3C7] mr-3"
+                      >
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-smartphone-line"></i>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 class="text-sm font-medium text-gray-800">
+                          User research interviews
+                        </h4>
+                        <div class="flex items-center mt-1">
+                          <span class="text-xs text-gray-500"
+                            >Mobile App Development</span
+                          >
+                          <span class="mx-2 text-gray-300">•</span>
+                          <span class="text-xs text-gray-500">3h 45m</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center text-xs font-medium text-gray-600"
+                    >
+                      <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                      <span>Completed</span>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-between py-3 border-b border-gray-100"
+                  >
+                    <div class="flex items-start">
+                      <div
+                        class="w-8 h-8 rounded-full bg-[#FBBF72] bg-opacity-10 flex items-center justify-center text-[#FBBF72] mr-3"
+                      >
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-mail-line"></i>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 class="text-sm font-medium text-gray-800">
+                          Email newsletter design
+                        </h4>
+                        <div class="flex items-center mt-1">
+                          <span class="text-xs text-gray-500"
+                            >Marketing Campaign</span
+                          >
+                          <span class="mx-2 text-gray-300">•</span>
+                          <span class="text-xs text-gray-500">2h 30m</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center text-xs font-medium text-yellow-600"
+                    >
+                      <div
+                        class="w-2 h-2 rounded-full bg-yellow-500 mr-1"
+                      ></div>
+                      <span>In Progress</span>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-between py-3 border-b border-gray-100"
+                  >
+                    <div class="flex items-start">
+                      <div
+                        class="w-8 h-8 rounded-full bg-[#FC8D62] bg-opacity-10 flex items-center justify-center text-[#FC8D62] mr-3"
+                      >
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-article-line"></i>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 class="text-sm font-medium text-gray-800">
+                          Blog post writing
+                        </h4>
+                        <div class="flex items-center mt-1">
+                          <span class="text-xs text-gray-500"
+                            >Content Creation</span
+                          >
+                          <span class="mx-2 text-gray-300">•</span>
+                          <span class="text-xs text-gray-500">2h 10m</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center text-xs font-medium text-yellow-600"
+                    >
+                      <div
+                        class="w-2 h-2 rounded-full bg-yellow-500 mr-1"
+                      ></div>
+                      <span>In Progress</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between py-3">
+                    <div class="flex items-start">
+                      <div
+                        class="w-8 h-8 rounded-full bg-[#57B5E7] bg-opacity-10 flex items-center justify-center text-[#57B5E7] mr-3"
+                      >
+                        <div class="w-4 h-4 flex items-center justify-center">
+                          <i class="ri-layout-line"></i>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 class="text-sm font-medium text-gray-800">
+                          Create wireframes for homepage
+                        </h4>
+                        <div class="flex items-center mt-1">
+                          <span class="text-xs text-gray-500"
+                            >Website Redesign</span
+                          >
+                          <span class="mx-2 text-gray-300">•</span>
+                          <span class="text-xs text-gray-500">1h 45m</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center text-xs font-medium text-blue-600"
+                    >
+                      <div class="w-2 h-2 rounded-full bg-blue-500 mr-1"></div>
+                      <span>Planned</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Add Task Button -->
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                  <button class="w-full py-2 flex items-center justify-center text-sm text-primary hover:bg-gray-50 border border-dashed border-gray-300 rounded-button">
+                    <div class="w-4 h-4 flex items-center justify-center mr-2">
+                      <i class="ri-add-line"></i>
+                    </div>
+                    Add New Task
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Sidebar Toggle Functionality
+        const sidebar = document.getElementById("sidebar");
+        const toggleSidebarBtn = document.getElementById("toggle-sidebar");
+        const showSidebarBtn = document.getElementById("show-sidebar");
+        
+        function toggleSidebar() {
+          if (sidebar.classList.contains("w-64")) {
+            sidebar.classList.remove("w-64");
+            sidebar.classList.add("w-0");
+            showSidebarBtn.classList.remove("hidden");
+          } else {
+            sidebar.classList.remove("w-0");
+            sidebar.classList.add("w-64");
+            showSidebarBtn.classList.add("hidden");
+          }
+        }
+        
+        toggleSidebarBtn.addEventListener("click", toggleSidebar);
+        showSidebarBtn.addEventListener("click", toggleSidebar);
+      });
+    </script>
+  </body>
+</html> 
