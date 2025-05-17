@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useFocusStore } from '../../../store/useFocusStore';
+import { Avatar } from '../../ui/Avatar';
+import { Icon } from '../../ui/Icon';
+import clsx from 'clsx';
 
 interface NavItem {
   label: string;
@@ -9,105 +11,80 @@ interface NavItem {
 }
 
 export const Sidebar: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
-  const user = useFocusStore(state => state.user);
-  
-  // Navigation items
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   const navItems: NavItem[] = [
-    { label: 'Dashboard', path: '/dashboard', icon: 'ri-dashboard-line' },
-    { label: 'Projects & Tasks', path: '/dashboard/projects', icon: 'ri-task-line' },
-    { label: 'Pomodoro Timer', path: '/dashboard/timer', icon: 'ri-timer-line' },
-    { label: 'Calendar', path: '/dashboard/calendar', icon: 'ri-calendar-line' },
-    { label: 'Settings', path: '/dashboard/settings', icon: 'ri-settings-line' },
+    { label: 'Dashboard', path: '/dashboard', icon: 'dashboard-line' },
+    { label: 'Projects & Tasks', path: '/dashboard/projects', icon: 'task-line' },
+    { label: 'Pomodoro Timer', path: '/dashboard/timer', icon: 'timer-line' },
+    { label: 'Calendar', path: '/dashboard/calendar', icon: 'calendar-line' },
+    { label: 'Settings', path: '/dashboard/settings', icon: 'settings-line' },
   ];
-  
-  // Toggle sidebar collapse
+
   const toggleSidebar = () => {
-    setCollapsed(!collapsed);
+    setIsCollapsed(!isCollapsed);
   };
-  
-  // Get user initials for avatar
-  const getInitials = () => {
-    if (!user.name) return '';
-    return user.name
-      .split(' ')
-      .map(part => part.charAt(0))
-      .join('')
-      .toUpperCase();
-  };
-  
+
   return (
-    <aside
-      className={`${collapsed ? 'w-0 md:w-16' : 'w-64'} bg-white border-r border-gray-200 flex flex-col transition-all duration-300 h-screen`}
-      id="sidebar"
+    <aside 
+      className={clsx(
+        'bg-white border-r border-gray-200 flex flex-col transition-all duration-300',
+        isCollapsed ? 'w-0 overflow-hidden' : 'w-64'
+      )}
     >
+      {/* Logo */}
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-        {!collapsed && (
-          <h1 className="text-xl font-['Pacifico'] text-primary">Make10000hours</h1>
-        )}
-        <button
+        <h1 className="text-xl font-pacifico text-primary">logo</h1>
+        <button 
           onClick={toggleSidebar}
-          className="p-1 hover:bg-gray-100 rounded-full"
-          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          className="p-1 hover:bg-gray-100 rounded"
         >
-          <div className="w-5 h-5 flex items-center justify-center text-gray-500">
-            <i className={`ri-arrow-${collapsed ? 'right' : 'left'}-s-line`}></i>
-          </div>
+          <Icon name="arrow-left-s-line" className="text-gray-500" />
         </button>
       </div>
-      
-      {!collapsed && (
-        <div className="p-4 border-b border-gray-200">
-          <div className="flex items-center">
-            <div
-              className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white"
-            >
-              <span className="font-medium">{getInitials()}</span>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm font-medium text-gray-900">{user.name}</p>
-              <p className="text-xs text-gray-500">{user.role}</p>
-            </div>
+
+      {/* User Profile */}
+      <div className="p-4 border-b border-gray-200">
+        <div className="flex items-center">
+          <Avatar initials="JD" bgColor="bg-primary" />
+          <div className="ml-3">
+            <p className="text-sm font-medium text-gray-900">John Doe</p>
+            <p className="text-xs text-gray-500">Product Manager</p>
           </div>
         </div>
-      )}
-      
+      </div>
+
+      {/* Navigation */}
       <nav className="flex-1 overflow-y-auto p-4">
         <ul className="space-y-1">
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            
-            return (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={`flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                    isActive
-                      ? 'text-primary bg-indigo-50'
-                      : 'text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="w-5 h-5 flex items-center justify-center mr-3">
-                    <i className={item.icon}></i>
-                  </div>
-                  {!collapsed && item.label}
-                </Link>
-              </li>
-            );
-          })}
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className={clsx(
+                  'flex items-center px-3 py-2 text-sm font-medium rounded-md',
+                  location.pathname === item.path
+                    ? 'text-primary bg-indigo-50'
+                    : 'text-gray-600 hover:bg-gray-50'
+                )}
+              >
+                <Icon name={item.icon} className="mr-3" />
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
-      
+
+      {/* Help & Support */}
       <div className="p-4 border-t border-gray-200">
         <Link
-          to="/"
+          to="/dashboard/support"
           className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50"
         >
-          <div className="w-5 h-5 flex items-center justify-center mr-3">
-            <i className="ri-arrow-left-line"></i>
-          </div>
-          {!collapsed && 'Back to Home'}
+          <Icon name="question-line" className="mr-3" />
+          Help & Support
         </Link>
       </div>
     </aside>

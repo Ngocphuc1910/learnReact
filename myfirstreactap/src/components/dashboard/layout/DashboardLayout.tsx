@@ -5,13 +5,13 @@ import { Header } from './Header';
 
 export const DashboardLayout: React.FC = () => {
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="dashboard-layout">
       <Sidebar />
       
-      <main className="flex-1 flex flex-col overflow-hidden">
+      <main className="dashboard-main">
         <Header />
         
-        <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
+        <div className="dashboard-content">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>
