@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../../ui/Card';
 import { Icon } from '../../ui/Icon';
+import { useDashboardStore } from '../../../store/useDashboardStore';
 
 export const FocusStreak: React.FC = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date(2025, 4)); // May 2025
+  const { selectedDate, setSelectedDate } = useDashboardStore();
+  
+  // When selectedDate changes from outside, update component if needed
+  useEffect(() => {
+    // If the selected date is in a different month, update currentMonth
+    if (selectedDate.getMonth() !== currentMonth.getMonth() || 
+        selectedDate.getFullYear() !== currentMonth.getFullYear()) {
+      setCurrentMonth(new Date(selectedDate.getFullYear(), selectedDate.getMonth()));
+    }
+  }, [selectedDate, currentMonth]);
   
   // Mock data for focus streak
   const streakData = {
@@ -57,6 +68,15 @@ export const FocusStreak: React.FC = () => {
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
   
+  // Handle day click - update selected date in store
+  const handleDayClick = (date: Date, hasFocusTime: boolean) => {
+    // Only allow clicking on past days or today
+    const today = new Date(2025, 4, 16); // Mock current date
+    if (date <= today) {
+      setSelectedDate(date);
+    }
+  };
+  
   // Generate calendar grid
   const generateCalendarGrid = () => {
     const year = currentMonth.getFullYear();
@@ -76,6 +96,7 @@ export const FocusStreak: React.FC = () => {
       const date = new Date(year, month, day);
       const isToday = date.toDateString() === today.toDateString();
       const isPastDay = date < today;
+      const isSelected = date.toDateString() === selectedDate.toDateString();
       
       // For the demo, use the mock data for the current month (May 2025)
       // and generate random data for other months
@@ -88,18 +109,27 @@ export const FocusStreak: React.FC = () => {
       
       let dayClass = '';
       if (isPastDay && hasFocusTime) {
-        dayClass = 'w-8 h-8 rounded-full bg-primary flex items-center justify-center text-xs text-white cursor-pointer hover:bg-opacity-90';
+        dayClass = `w-8 h-8 rounded-full bg-primary flex items-center justify-center text-xs text-white cursor-pointer hover:bg-opacity-90 ${
+          isSelected ? 'ring-2 ring-offset-2 ring-primary' : ''
+        }`;
       } else if (isPastDay) {
-        dayClass = 'w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xs text-gray-400 cursor-pointer hover:bg-gray-50';
+        dayClass = `w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xs text-gray-400 cursor-pointer hover:bg-gray-50 ${
+          isSelected ? 'ring-2 ring-offset-2 ring-primary' : ''
+        }`;
       } else if (isToday) {
-        dayClass = 'w-8 h-8 rounded-full bg-white border-2 border-primary border-dashed flex items-center justify-center text-xs text-gray-600';
+        dayClass = `w-8 h-8 rounded-full bg-white border-2 border-primary border-dashed flex items-center justify-center text-xs text-gray-600 ${
+          isSelected ? 'ring-2 ring-offset-2 ring-primary' : ''
+        }`;
       } else {
         dayClass = 'w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xs text-gray-300';
       }
       
       return (
         <div key={`day-${day}`} className="flex items-center justify-center">
-          <div className={dayClass}>
+          <div 
+            className={dayClass}
+            onClick={() => handleDayClick(date, hasFocusTime)}
+          >
             {day}
           </div>
         </div>

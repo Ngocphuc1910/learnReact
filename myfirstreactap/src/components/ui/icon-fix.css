@@ -1,9 +1,3 @@
-@font-face {
-  font-family: "remixicon";
-  src: url('/icons/remixicon.woff2') format('woff2');
-  font-display: swap;
-}
-
 [class^="ri-"], [class*=" ri-"] {
   font-family: 'remixicon' !important;
   font-style: normal;
